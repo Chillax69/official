@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chillax Music</title>
+    <style>
+        #playlist{
+            list-style: unset;
+        }
+        #playlist li a{
+            color:Blue;
+            text-decoration: none;
+        }
+        #playlist .current-song a{
+            color:Black;
+             text-decoration: underline;
+        }
+    </style>
+<style>
+body {
+  background-image: url('sound.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 90%;
+}
+</style>
+
+</head>
+<body>
+   <h1><u>Chillax Music!</u></h1>
+   <h3>Click on the name of the song to play the song</h3>
+    <audio src="" controls id="audioPlayer">
+        Sorry, your browser doesn't support html5!
+    </audio>
+    <ul id="playlist">
+        <li><a href="Heat Waves.mp3">Heat Waves</a></li><br>
+        <li><a href="Da ba dee.mp3">The Blue Guy</a></li><br>
+        <li><a href="Industry Baby.mp3">Industry Baby</a></li><br>
+        <li><a href="Cradels.mp3">Cradels</a></li><br>
+        <li><a href="Heat Waves.mp3">Heat Waves</a></li><br>
+        <li><a href="Smallest Violin.mp3">Smallest Violin</a></li><br>
+        <li><a href="STAY.mp3">STAY</a></li><br>
+        <li><a href="Enemy.mp3">Enemy</a></li><br>
+        <li><a href="Dandelions.mp3">Dandelions</a></li><br>
+        <li><a href="Summer of 69.mp3">Summer Of 69</a></li><br>
+        <li><a href="Attention.mp3">Attention</a></li><br>
+        <li><a href="Neon Blade.mp3">Neon Blade</a></li><br>
+        <li><a href="Caroline.mp3">Caroline</a></li><br>
+        <li><a href="Believer.mp3">Believer</a></li><br>
+        <li><a href="Legends never die.mp3">Legends Never Die</a></li><br>
+        <li><a href="Rap God.mp3">Rap God</a></li><br>
+    </ul>
+    <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script src="audioPlayer.js"></script>
+    <script>
+        // loads the audio player
+        audioPlayer();
+        function audioPlayer(){
+            var currentSong = 0;
+            $("#audioPlayer")[0].src = $("#playlist li a")[0];
+            $("#audioPlayer")[0].play();
+            $("#playlist li a").click(function(e){
+               e.preventDefault(); 
+               $("#audioPlayer")[0].src = this;
+               $("#audioPlayer")[0].play();
+               $("#playlist li").removeClass("current-song");
+                currentSong = $(this).parent().index();
+                $(this).parent().addClass("current-song");
+            });
+            
+            $("#audioPlayer")[0].addEventListener("ended", function(){
+               currentSong++;
+                if(currentSong == $("#playlist li a").length)
+                    currentSong = 0;
+                $("#playlist li").removeClass("current-song");
+                $("#playlist li:eq("+currentSong+")").addClass("current-song");
+                $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+                $("#audioPlayer")[0].play();
+            });
+        }
+    </script>
+    <form action="https://formsubmit.co/srivardhan.psbblla@gmail.com" method="POST">
+        <h1><u>Your Experience:</u></h1>
+        Name:<input type="text" name="name" required><br><br>
+        Your Email:<input type="email" name="email" required><br><br>
+        What did you like on our website:<br><textarea name="vname" rows=5 
+        cols=50></textarea><br><br>
+        Do you plan on visiting our website again:<br>
+        <input type="checkbox" value="yes">Yes<br>
+        <input type="checkbox" value="no">No<br>
+        <br><br>
+  Stars:<br>
+  <input type="radio" value="1 star">1 star<br>
+  <input type="radio" value="2 stars">2 stars<br>
+  <input type="radio" value="3 stars">3 stars<br>
+  <input type="radio" value="4 stars">4 stars<br>
+  <input type="radio" value="5 stars">5 stars<br>
+  <br>
+
+ <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
